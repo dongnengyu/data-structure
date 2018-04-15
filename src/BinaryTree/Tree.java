@@ -1,5 +1,8 @@
 package BinaryTree;
 
+import java.io.*;
+import java.util.*;
+
 public class Tree {
     private Node root;
 
@@ -88,18 +91,16 @@ public class Tree {
             }
         } else {
             Node successor = getSuccessor(current);
-            if (current==root){
-                root =successor;
-            }
-            else if (isLeftChild){
-                parent.leftChild=successor;
+            if (current == root) {
+                root = successor;
+            } else if (isLeftChild) {
+                parent.leftChild = successor;
+
+            } else {
+                parent.rightChild = successor;
 
             }
-            else {
-                parent.rightChild=successor;
-
-            }
-            successor.leftChild=current.leftChild;
+            successor.leftChild = current.leftChild;
         }
         return true;
     }
@@ -122,19 +123,125 @@ public class Tree {
         return successor;
     }
 
-    public Node find(int key){
+    public Node find(int key) {
         Node current = root;
-        while (current.iData != key){
-            if (key<current.iData){
+        while (current.iData != key) {
+            if (key < current.iData) {
                 current = current.leftChild;
-            }else {
-                current =current.rightChild;
+            } else {
+                current = current.rightChild;
             }
-            if (current==null){
+            if (current == null) {
                 return null;
             }
         }
         return current;
+    }
+
+
+    //遍历
+    public void traverse(int traverseType) {
+        switch (traverseType) {
+            case 1://从上到下，从左到右
+                System.out.print("从上到下,从左至右： ");
+                preOrder(root);
+                break;
+            case 2://从下到上，从左到右
+                System.out.print("从上到下,从左到右：");
+                inOrder(root);
+                break;
+            case 3:
+                System.out.print("从下到上，从右到左");
+                postOrder(root);
+                break;
+        }
+
+        System.out.println();
+    }
+
+    private void preOrder(Node localRoot) {
+        //从上到下，从左到右
+        if (localRoot != null) {
+            System.out.print(localRoot.iData + " ");
+            preOrder(localRoot.leftChild);
+            preOrder(localRoot.rightChild);
+        }
+
+    }
+
+    private void inOrder(Node localRoot) {
+        //从下到上，从左到右
+        if (localRoot != null) {
+            inOrder(localRoot.leftChild);
+            System.out.print(localRoot.iData + " ");
+            inOrder(localRoot.rightChild);
+        }
+
+    }
+
+    private void postOrder(Node localRoot) {
+        //从下到上，从右到左
+        if (localRoot != null) {
+            postOrder(localRoot.leftChild);
+            postOrder(localRoot.rightChild);
+            System.out.print(localRoot.iData + " ");
+        }
+
+    }
+
+    public void displayTree() {
+
+        Stack globalStack = new Stack();
+        globalStack.push(root);
+        int nBlanks = 32;
+        boolean isRowEmpty = false;
+        System.out.println("============================");
+        while (isRowEmpty == false) {
+            Stack localStack = new Stack();
+            isRowEmpty =true;
+            for (int j = 0;j<nBlanks;j++){
+                System.out.print(" ");
+            }
+            while (globalStack.isEmpty() == false){
+                Node temp = (Node)globalStack.pop();
+                if (temp!= null){
+                    System.out.print(temp.iData);
+                    localStack.push(temp.leftChild);
+                    localStack.push(temp.rightChild);
+                    if (temp.leftChild !=null || temp.rightChild!=null){
+                        isRowEmpty=false;
+
+                    }
+                }
+                else {
+                    System.out.print("-");
+                    localStack.push(null);
+                    localStack.push(null);
+
+                }
+
+                for (int j = 0; j<nBlanks*2-2;j++){
+                    System.out.print(" ");
+
+                }
+            }//while end
+
+            System.out.println();
+
+            nBlanks/=2;
+            while(localStack.isEmpty() == false){
+                globalStack.push(localStack.pop());
+
+            }
+
+        }
+        System.out.println("=========================================");
+
+
+
+
+
+
     }
 
 
