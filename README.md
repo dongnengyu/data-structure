@@ -49,7 +49,7 @@
 ```
 
 
-#### AMC题目
+#### ACM题目
 
 ```
 
@@ -83,6 +83,6 @@
  * 所以，m>=n时，有f(m,n) = f(m,n-1) + f(m-n,n);
  */
  
-位置：/Users/xiaomu/Documents/ideaProject/data-structure/src/AMC/NToMApple.java
+位置：/Users/xiaomu/Documents/ideaProject/data-structure/src/ACM/NToMApple.java
 
 ```
