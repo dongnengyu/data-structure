@@ -82,5 +82,7 @@
  * 放到n个盘子里的放法，这样就成功把f(m,n)降到了f(m-n,n)。
  * 所以，m>=n时，有f(m,n) = f(m,n-1) + f(m-n,n);
  */
+ 
+位置：/Users/xiaomu/Documents/ideaProject/data-structure/src/AMC/NToMApple.java
 
 ```
